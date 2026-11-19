@@ -1,77 +1,55 @@
-// CivicFolio Truthful Data Store
+/* CivicFolio sample data: fictional and explicitly labeled. No real resume data is shipped. */
 const defaultResumeData = {
   profile: {
-    fullName: "Bhuvan Batra",
-    headline: "AI & ML Undergraduate | Python & Backend Engineering",
-    email: "bhuvanbatra17may2006@gmail.com",
-    phone: "+91-XXXXXXXXXX", // Rendered strictly on downloadable resume
-    location: "Chandigarh, India",
-    linkedin: "https://www.linkedin.com/in/bhuvan-batra-a75267220/",
-    github: "https://github.com/HuMaN-OG",
-    summary: "B.E. student specializing in Artificial Intelligence and Machine Learning at Chandigarh University (2024-2028). Passionate about robust backend architectures, digital public services, and practical applied AI."
+    fullName: "Alex Morgan",
+    headline: "Software Engineering Undergraduate",
+    email: "alex.morgan@example.com",
+    phone: "",
+    location: "Your city",
+    linkedin: "",
+    github: "",
+    website: "",
+    summary: "Computer science student focused on building reliable web applications and APIs. Interested in backend development, accessible interfaces, and practical engineering."
+  },
+  skills: {
+    languages: ["Python", "JavaScript", "SQL"],
+    frameworks: ["React", "Node.js", "Express", "REST APIs"],
+    databases: ["SQLite", "Database Management"],
+    tools: ["Git", "GitHub Actions", "Testing"]
   },
   education: [
-    {
-      institution: "Chandigarh University",
-      degree: "Bachelor of Engineering (B.E.), AI & ML",
-      dates: "2024 - 2028",
-      cgpa: "6.66 / 10.0",
-      notes: "Relevant Coursework: Data Structures, Database Systems, Computer Networks, Applied Machine Learning"
-    }
+    { institution: "Example University", degree: "B.Sc. Computer Science", dates: "2023 – 2027", details: "Coursework: Databases, data structures, software engineering" }
   ],
-  skills: {
-    languages: ["Python", "JavaScript", "C++", "SQL"],
-    frameworks: ["FastAPI", "Flask", "Node.js", "Express.js", "React"],
-    databases: ["SQLite", "MongoDB", "PostgreSQL"],
-    tools: ["Git", "GitHub Actions", "Docker", "REST APIs", "Linux"]
-  },
+  experience: [
+    { title: "Student Developer", company: "Campus Project Team", dates: "2025 – Present",
+      bullets: "Implemented REST API endpoints for a student project with input validation.\nCollaborated with teammates using pull requests and issue tracking." }
+  ],
   projects: [
-    {
-      title: "Disaster Triaging System",
-      role: "Backend & ML Pipeline Contributor",
-      link: "https://github.com/HuMaN-OG/Disaster-Triaging",
-      description: "Research prototype triaging multimodal disaster distress reports across English, Hindi, and Hinglish with role-based access control and strict authentication."
-    },
-    {
-      title: "University Information Chatbot",
-      role: "Backend & NLP Developer",
-      link: "https://github.com/HuMaN-OG/University-Chatbot",
-      description: "Student assistance portal combining TF-IDF intent matching with secure JWT administration and rate limiting for university service queries."
-    },
-    {
-      title: "FORGE AI Computer-Use Engine",
-      role: "Backend & AI Lead",
-      link: "https://github.com/HuMaN-OG/Forge",
-      description: "Desktop automation platform with Express orchestrator, human approval gates, and a sandboxed FastAPI execution runtime."
-    },
-    {
-      title: "Full-Stack Expense Tracker",
-      role: "Sole Developer",
-      link: "https://github.com/HuMaN-OG/Expense-Tracker",
-      description: "Personal finance tracker with Express, MongoDB, analytics dashboards, CSV exports, and database health verification."
-    }
+    { title: "Task Management App", tech: "React, Node.js, SQLite", dates: "2025",
+      url: "", bullets: "Built task creation, status updates, and filtering for a sample team workflow.\nAdded basic input validation and API tests." }
   ],
-  publications: [
-    {
-      title: "Enhancing Lung Cancer Screening by Analysing Clinically Symptoms Using Machine Learning",
-      venue: "IEEE ICWITE 2025",
-      doi: "10.1109/ICWITE64848.2025.11307058",
-      link: "https://doi.org/10.1109/ICWITE64848.2025.11307058"
-    }
-  ]
+  certifications: [],
+  publications: []
 };
 
+const emptyResumeData = {
+  profile: {fullName:"", headline:"", email:"", phone:"", location:"", linkedin:"", github:"", website:"", summary:""},
+  skills: {languages:[],frameworks:[],databases:[],tools:[]},
+  education: [], experience: [], projects: [], certifications: [], publications: []
+};
+
+/* Generic examples, not scraped or represented as current employer vacancies. */
 const sampleJobDescriptions = {
-  egov: {
-    title: "Public Sector Software & Data Systems Intern",
-    text: "Looking for an engineering intern with strong Python, backend API, and database skills. Responsibilities include building citizen-facing REST services, database integration, maintaining data integrity, unit testing, and technical documentation."
-  },
-  backend: {
-    title: "Backend Engineer Intern",
-    text: "Seeking backend developer with Node.js, Express, Python, MongoDB, SQL, and Docker experience. Focus on RESTful APIs, authentication, testing, and security."
-  }
+  software: {title:"Software Engineer", text:"Seeking software engineer with JavaScript, Python, data structures, Git, unit testing, REST APIs, SQL, collaboration and technical documentation skills."},
+  backend: {title:"Backend Developer", text:"Build APIs using Python, FastAPI or Node.js with SQL databases, authentication, testing, Docker, Git and continuous integration."},
+  data: {title:"Data Analyst", text:"Analyze and report data using SQL, Python, Excel, Power BI, data visualization, dashboards, statistics, and stakeholder communication."},
+  ml: {title:"Machine Learning Engineer", text:"Develop machine learning models using Python, scikit-learn, NLP, model evaluation, feature engineering, data pipelines, and Git."},
+  deployment: {title:"Deployment Analyst", text:"Support application deployment, release management, user training, technical documentation, stakeholder management, change management, SAP, Power BI, troubleshooting, and reporting."},
+  product: {title:"Product Analyst", text:"Use SQL, Excel, analytics, dashboards, product metrics, user research, stakeholder communication, A/B testing, and reporting."},
+  custom: {title:"Custom job description", text:""}
 };
+sampleJobDescriptions.egov = {title:"Digital Public Services Intern",text:"Looking for Python, backend APIs, database integration, REST services, security, testing, technical documentation and data integrity skills."};
 
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { defaultResumeData, sampleJobDescriptions };
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { defaultResumeData, emptyResumeData, sampleJobDescriptions };
 }
