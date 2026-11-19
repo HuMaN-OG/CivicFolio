@@ -52,3 +52,11 @@ test("empty JD returns no fabricated percentage",()=>{
   assert.equal(m.totalJobKeywords,0);
   assert.equal(m.percentage,0);
 });
+
+test("custom niche requirements are explicitly counted without invented ATS data",()=>{
+  const result=matchKeywords("Python, Whatfix, stakeholder management",
+    "Support Python APIs and stakeholder management", "Whatfix, Oracle EBS");
+  assert.equal(result.totalJobKeywords,4);
+  assert.ok(result.matched.includes("whatfix"));
+  assert.ok(result.missing.includes("oracle ebs"));
+});
