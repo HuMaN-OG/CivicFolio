@@ -6,6 +6,10 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+concurrency:
+  group: civicfolio-browser-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   smoke:
     runs-on: ubuntu-24.04
