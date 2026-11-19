@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   function newState(sample) {
     return {resume:normalizeResume(sample?defaultResumeData:emptyResumeData),
-      sample:!!sample,jobPreset:"software",jobDescription:sampleJobDescriptions.software.text,
+      sample:!!sample,jobPreset:"software",jobDescription:sampleJobDescriptions.software.text,customKeywords:"",
       jobTitle:"",template:"modern",versions:[]};
   }
   let state=newState(true);
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   function renderOverview(){
     const readiness=analyzeReadiness(state.resume);
-    const rMatch=matchKeywords(resumeToText(state.resume),state.jobDescription);
+    const rMatch=matchKeywords(resumeToText(state.resume),state.jobDescription,state.customKeywords);
     $("dashCoverage").textContent=rMatch.totalJobKeywords?rMatch.percentage+"%":"—";
     $("dashCoverageCaption").textContent=rMatch.totalJobKeywords?rMatch.matchedCount+" of "+rMatch.totalJobKeywords+" recognized skills":"Choose a job description";
     $("dashReadiness").textContent=readiness.completed+"/"+readiness.total;
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if(name===null)return;
     if(!name.trim()){toast("Enter a version name.");return;}
     const item={id:String(Date.now())+Math.random().toString(36).slice(2,7),name:name.trim().slice(0,90),
-      createdAt:new Date().toISOString(),resume:clone(state.resume),jobDescription:state.jobDescription,jobPreset:state.jobPreset,template:state.template};
+      createdAt:new Date().toISOString(),resume:clone(state.resume),jobDescription:state.jobDescription,jobPreset:state.jobPreset,customKeywords:state.customKeywords,template:state.template};
     state.versions.unshift(item);state.versions=state.versions.slice(0,25);
     persist();renderOverview();if(currentPage==="versions")renderVersions();toast("Version saved locally.");
   }
@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }else{
       if(!confirm("Restore "+v.name+"? This replaces your current draft. Save it first if needed."))return;
       state.resume=normalizeResume(v.resume);state.jobDescription=v.jobDescription||"";
-      state.jobPreset=v.jobPreset||"custom";state.template=v.template||"modern";state.sample=false;
+      state.jobPreset=v.jobPreset||"custom";state.customKeywords=v.customKeywords||"";state.template=v.template||"modern";state.sample=false;
       persist();go("editor");toast("Version restored.");
     }
   });
@@ -238,6 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $("jobPreset").value=state.jobPreset;
     $("jobTitle").value=state.jobTitle||"";
     $("jobDescription").value=state.jobDescription||"";
+    $("customKeywords").value=state.customKeywords||"";
     document.querySelectorAll('input[name="resumeSource"]').forEach(el=>{el.checked=el.value===source;});
     $("uploadPanel").hidden=source!=="upload";
     $("resumePaste").value=importedText;
@@ -259,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if(desc.length<30){toast("Paste a meaningful job description (at least 30 characters).");return;}
     const text=source==="editor"?resumeToText(state.resume):importedText.trim();
     if(text.length<30){toast("Add your resume content first.");return;}
-    const match=matchKeywords(text,desc);
+    const match=matchKeywords(text,desc,state.customKeywords);
     const readiness=source==="editor"?analyzeReadiness(state.resume):getUploadedChecks(text);
     lastCheck={match,readiness,source};
     displayCheckerResults(lastCheck);
@@ -295,6 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   $("jobDescription").addEventListener("input",e=>{state.jobDescription=e.target.value;state.jobPreset="custom";$("jobPreset").value="custom";persist();});
   $("jobTitle").addEventListener("input",e=>{state.jobTitle=e.target.value;persist();});
+  $("customKeywords").addEventListener("input",e=>{state.customKeywords=e.target.value.slice(0,5000);persist();});
   document.querySelectorAll('input[name="resumeSource"]').forEach(el=>el.addEventListener("change",()=>{
     source=document.querySelector('input[name="resumeSource"]:checked').value;
     $("uploadPanel").hidden=source!=="upload";lastCheck=null;$("checkerResults").hidden=true;$("checkerPlaceholder").hidden=false;
@@ -374,6 +376,7 @@ document.addEventListener("DOMContentLoaded", function () {
       state.jobDescription=String(parsed.jobDescription||"").slice(0,30000);
       state.jobPreset=sampleJobDescriptions[parsed.jobPreset]?parsed.jobPreset:"custom";
       state.jobTitle=String(parsed.jobTitle||"").slice(0,180);
+      state.customKeywords=String(parsed.customKeywords||"").slice(0,5000);
       state.template=["modern","classic"].includes(parsed.template)?parsed.template:"modern";
       state.versions=Array.isArray(parsed.versions)?parsed.versions.slice(0,25).filter(x=>x&&x.resume&&x.id):[];
       persist();go("overview");toast("Workspace restored from backup.");
