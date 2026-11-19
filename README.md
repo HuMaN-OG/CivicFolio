@@ -2,6 +2,8 @@
 
 A **general-purpose, local-first resume builder** with transparent job-description matching, version history and A4 PDF printing. Built by [Bhuvan Batra](https://github.com/HuMaN-OG).
 
+**[Open the live CivicFolio app](https://human-og.github.io/CivicFolio/)** · [Source code](https://github.com/HuMaN-OG/CivicFolio) · [Automated browser-test evidence](https://github.com/HuMaN-OG/CivicFolio/actions/workflows/browser-smoke.yml)
+
 **Important:** CivicFolio is not an ATS vendor, does not predict hiring decisions, and does not provide a proprietary “ATS pass score.” Skill coverage is an interpretable dictionary-based heuristic.
 
 ## What problem does it solve?
