@@ -65,10 +65,13 @@ function flattenSkills(value) {
   if (value && typeof value === "object") return Object.values(value).map(flattenSkills).join(" ");
   return "";
 }
-function matchKeywords(resumeTextOrSkills, jobText) {
+function matchKeywords(resumeTextOrSkills, jobText, extraKeywords) {
   const target = extractRequirements(jobText);
+  // Applicants can supply niche requirements outside the built-in dictionary.
+  const extras=String(extraKeywords||"").split(/[,;\n]/).map(x=>x.trim().toLowerCase()).filter(x=>x.length>=2).slice(0,30);
+  extras.forEach(x=>{if(!target.includes(x))target.push(x);});
   const resumeText = flattenSkills(resumeTextOrSkills);
-  const matched = target.filter(key=>SKILL_ALIASES[key].some(alias=>hasPhrase(resumeText,alias)));
+  const matched = target.filter(key=>(SKILL_ALIASES[key]||[key]).some(alias=>hasPhrase(resumeText,alias)));
   const missing = target.filter(key=>!matched.includes(key));
   const percentage = target.length ? Math.round(100*matched.length/target.length) : 0;
   return {percentage,score:percentage,matched,missing,matchedCount:matched.length,
