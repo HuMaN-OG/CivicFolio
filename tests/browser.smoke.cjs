@@ -41,11 +41,24 @@ const fs=require("node:fs");
     assert.equal(pdf.subarray(0,4).toString(),"%PDF");
     fs.writeFileSync("artifacts/fictional-sample-resume.pdf",pdf);
 
+    // Confirm an actual generated PDF can be read back by the ATS-style importer.
+    await page.locator('[data-nav="checker"]').first().click();
+    await page.locator('input[name="resumeSource"][value="upload"]').check();
+    await page.locator("#resumeFile").setInputFiles("artifacts/fictional-sample-resume.pdf");
+    await page.waitForFunction(() => document.querySelector("#parseStatus").textContent.startsWith("Loaded"),null,{timeout:35000});
+    await page.locator("#runCheckBtn").click();
+    assert.ok((await page.locator("#checkerResults").innerText()).includes("Recognized skill coverage"));
+
+    await page.locator('[data-nav="export"]').first().click();
     await page.setViewportSize({width:390,height:844});
+    await page.evaluate(() => {document.documentElement.style.scrollBehavior="auto";window.scrollTo(0,0);});
+    await page.waitForTimeout(250);
+    await page.screenshot({path:"artifacts/civicfolio-mobile-closed.png",fullPage:true});
     await page.locator("#mobileMenuBtn").click();
     assert.ok(await page.locator("#sidebar").evaluate(el=>el.classList.contains("mobile-open")));
+    await page.waitForTimeout(350);
     await page.screenshot({path:"artifacts/civicfolio-mobile.png",fullPage:true});
     assert.deepEqual(errors,[],"Unexpected browser JavaScript errors");
-    console.log("CivicFolio browser smoke PASSED: overview, editing, ATS check, snapshot, PDF and mobile navigation.");
+    console.log("CivicFolio browser smoke PASSED: overview, editing, ATS check, snapshot, PDF export/import and mobile navigation.");
   }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
