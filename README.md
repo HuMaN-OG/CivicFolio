@@ -4,6 +4,10 @@ A **general-purpose, local-first resume builder** with transparent job-descripti
 
 **[Open the live CivicFolio app](https://human-og.github.io/CivicFolio/)** · [Source code](https://github.com/HuMaN-OG/CivicFolio) · [Automated browser-test evidence](https://github.com/HuMaN-OG/CivicFolio/actions/workflows/browser-smoke.yml)
 
+<p align="center">
+  <img src="docs/screenshots/civicfolio_dashboard.png" alt="CivicFolio Career Workspace Dashboard" width="900">
+</p>
+
 **Important:** CivicFolio is not an ATS vendor, does not predict hiring decisions, and does not provide a proprietary “ATS pass score.” Skill coverage is an interpretable dictionary-based heuristic.
 
 ## What problem does it solve?
@@ -25,6 +29,10 @@ Candidates need to tailor resumes for many roles, understand which job requireme
 | **A4 export** | Browser Print / Save as PDF; modern or classic ATS-friendly single-column resume layout |
 | **Local-first privacy** | Browser localStorage; no CivicFolio account, database or server-side resume uploads |
 | **Responsive UI** | Navigation for mobile, keyboard focus styles and semantic HTML |
+
+<p align="center">
+  <img src="docs/screenshots/civicfolio_ats_checker.png" alt="Transparent ATS-Style Resume Checker" width="900">
+</p>
 
 The default “Alex Morgan” candidate is **fictional sample data**, not a real person’s resume. Replace it before using CivicFolio for an application.
 

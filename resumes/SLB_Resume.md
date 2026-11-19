@@ -2,7 +2,7 @@
 
 **B.E. Artificial Intelligence & Machine Learning | Chandigarh University | 2024–2028 (expected)**
 
-+91 93158 33796 · [bhuvan.batra05@gmail.com](mailto:bhuvan.batra05@gmail.com) · Punjab, India  
++91-XXXXXXXXXX · [bhuvan.batra05@gmail.com](mailto:bhuvan.batra05@gmail.com) · Punjab, India  
 [GitHub](https://github.com/HuMaN-OG) · [LinkedIn](https://www.linkedin.com/in/bhuvan-batra-a75267220/)
 
 ## Professional Summary
