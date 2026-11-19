@@ -43,6 +43,17 @@ npm test
 
 ---
 
+## 📄 Public Resume Versions
+
+Two role-specific, factual resumes are available as publicly viewable GitHub documents. These are designed to match the polished, one-page PDFs available from the resume owner.
+
+- **[NIC — Software & e-Governance Resume](resumes/NIC_Resume.md)**
+- **[SLB — Deployment Analyst Resume](resumes/SLB_Resume.md)**
+
+> The public GitHub pages show the resume text; the submitted PDF version is formatted as exactly one A4 page. For a **direct public PDF link**, upload the matching PDF to Google Drive and enable “Anyone with the link → Viewer,” or enable GitHub Pages and publish the PDFs there. Do not imply academic eligibility based solely on the resume: check each employer's stated criteria.
+
+---
+
 ## 🔗 Verified Profiles & Publications
 
 - **LinkedIn**: [https://www.linkedin.com/in/bhuvan-batra-a75267220/](https://www.linkedin.com/in/bhuvan-batra-a75267220/)
