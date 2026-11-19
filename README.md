@@ -2,7 +2,7 @@
 
 > An accessible resume and public-sector software portfolio application tailored for NIC-style digital governance, public data systems, and software engineering roles.
 
-![CivicFolio Interface](docs/screenshots/civicfolio_preview.svg)
+![CivicFolio Interface](docs/screenshots/civicfolio_preview.png)
 
 ---
 

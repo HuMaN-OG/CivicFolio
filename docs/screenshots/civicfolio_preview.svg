@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg width="800" height="520" viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
   <!-- Window frame -->
   <rect width="800" height="520" rx="10" fill="#0f172a" stroke="#334155" stroke-width="2"/>
@@ -5,19 +6,19 @@
   <circle cx="20" cy="20" r="5" fill="#ef4444"/>
   <circle cx="36" cy="20" r="5" fill="#f59e0b"/>
   <circle cx="52" cy="20" r="5" fill="#10b981"/>
-  <text x="400" y="25" text-anchor="middle" fill="#94a3b8" font-size="12">🏛️ CivicFolio — Public Sector Technology Portfolio & Verified Resume</text>
+  <text x="400" y="25" text-anchor="middle" fill="#94a3b8" font-size="12">CivicFolio - Public Sector Technology Portfolio &amp; Verified Resume</text>
 
   <!-- Navigation bar -->
   <rect x="20" y="55" width="760" height="45" rx="6" fill="#1e293b"/>
   <text x="35" y="82" fill="#38bdf8" font-size="14" font-weight="700">CivicFolio</text>
   <rect x="115" y="67" width="160" height="22" rx="11" fill="#0369a1"/>
-  <text x="195" y="82" text-anchor="middle" fill="#e0f2fe" font-size="10" font-weight="600">NIC & PUBLIC SECTOR TECH</text>
+  <text x="195" y="82" text-anchor="middle" fill="#e0f2fe" font-size="10" font-weight="600">NIC &amp; PUBLIC SECTOR TECH</text>
   <rect x="660" y="65" width="105" height="26" rx="4" fill="#2563eb"/>
   <text x="712" y="82" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="600">Export PDF</text>
 
   <!-- Left tool panel -->
   <rect x="20" y="115" width="320" height="385" rx="6" fill="#1e293b" stroke="#334155"/>
-  <text x="35" y="140" fill="#f8fafc" font-size="13" font-weight="600">Skill Matcher & Quality Check</text>
+  <text x="35" y="140" fill="#f8fafc" font-size="13" font-weight="600">Skill Matcher &amp; Quality Check</text>
   <rect x="35" y="155" width="290" height="70" rx="6" fill="#0f172a"/>
   <text x="50" y="180" fill="#94a3b8" font-size="11">Job Keyword Coverage:</text>
   <text x="50" y="210" fill="#22c55e" font-size="24" font-weight="700">84%</text>
@@ -33,14 +34,14 @@
 
   <rect x="35" y="300" width="290" height="80" rx="6" fill="#0f172a"/>
   <text x="50" y="325" fill="#38bdf8" font-size="11" font-weight="600">Academic Verification</text>
-  <text x="50" y="345" fill="#f8fafc" font-size="12">Chandigarh University — B.E. AI & ML</text>
+  <text x="50" y="345" fill="#f8fafc" font-size="12">Chandigarh University - B.E. AI &amp; ML</text>
   <text x="50" y="365" fill="#94a3b8" font-size="11">Verified Cumulative Score: CGPA 6.66</text>
 
   <!-- Right live resume preview -->
   <rect x="360" y="115" width="420" height="385" rx="6" fill="#ffffff"/>
   <text x="385" y="150" fill="#0f172a" font-size="18" font-weight="700">Bhuvan Batra</text>
-  <text x="385" y="170" fill="#475569" font-size="11">AI & ML Undergraduate | Chandigarh University (2024-2028)</text>
-  <text x="385" y="188" fill="#2563eb" font-size="10">linkedin.com/in/bhuvan-batra-a75267220 · github.com/HuMaN-OG</text>
+  <text x="385" y="170" fill="#475569" font-size="11">AI &amp; ML Undergraduate | Chandigarh University (2024-2028)</text>
+  <text x="385" y="188" fill="#2563eb" font-size="10">linkedin.com/in/bhuvan-batra-a75267220 | github.com/HuMaN-OG</text>
 
   <line x1="385" y1="200" x2="755" y2="200" stroke="#0f172a" stroke-width="1.5"/>
 
