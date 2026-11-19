@@ -1,201 +1,150 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CivicFolio — Public-Sector Tech Portfolio & Verified Resume</title>
-  <meta name="description" content="Accessible resume and public-sector software portfolio application for e-governance, backend, and data roles.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CivicFolio: a privacy-first, role-neutral resume builder with transparent ATS-style skill coverage, version history and PDF export.">
+  <meta name="theme-color" content="#14372f">
+  <title>CivicFolio — Resume Builder & ATS-Style Checker</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/matcher.js" defer></script>
+  <script src="js/app.js" defer></script>
 </head>
 <body>
-
-  <header role="banner">
-    <div class="logo-group">
-      <h1>🏛️ CivicFolio</h1>
-      <span class="badge-tag">NIC & Public Sector Tech Edition</span>
-    </div>
-    <div class="nav-actions">
-      <button type="button" id="versionToggleBtn">Version: E-Gov / Public Sector</button>
-      <button type="button" class="primary" id="printResumeBtn" aria-label="Print or Export PDF">📄 Export PDF</button>
-    </div>
-  </header>
-
-  <main class="container" role="main">
-    <!-- Left Interaction & Control Panel -->
-    <section class="panel edit-panel" aria-labelledby="controls-heading">
-      <h2 id="controls-heading" class="section-title">Resume & Analysis Tools</h2>
-      
-      <nav class="tab-nav" role="tablist">
-        <button type="button" class="tab-btn active" role="tab" id="tab-edit" aria-controls="view-edit" aria-selected="true">Editor</button>
-        <button type="button" class="tab-btn" role="tab" id="tab-match" aria-controls="view-match" aria-selected="false">Skill Matcher</button>
-        <button type="button" class="tab-btn" role="tab" id="tab-showcase" aria-controls="view-showcase" aria-selected="false">Showcase</button>
+  <a href="#mainContent" class="skip-link">Skip to content</a>
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" id="sidebar" aria-label="CivicFolio workspace">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">▤</span><span>Civic<span class="brand-accent">Folio</span></span></div>
+      <div class="workspace-card">
+        <span class="workspace-symbol" aria-hidden="true">✦</span>
+        <div><strong>Resume studio</strong><small>Build for any role</small></div>
+      </div>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Primary">
+        <button type="button" class="nav-link active" data-nav="overview" aria-current="page"><span aria-hidden="true">▦</span> Overview</button>
+        <button type="button" class="nav-link" data-nav="editor"><span aria-hidden="true">▤</span> Resume builder</button>
+        <button type="button" class="nav-link" data-nav="checker"><span aria-hidden="true">◎</span> ATS-style checker</button>
+        <button type="button" class="nav-link" data-nav="versions"><span aria-hidden="true">◷</span> Version history</button>
+        <button type="button" class="nav-link" data-nav="export"><span aria-hidden="true">⇩</span> Export centre</button>
       </nav>
-
-      <!-- Tab 1: Real-time Editor -->
-      <div id="view-edit" role="tabpanel" aria-labelledby="tab-edit">
-        <div class="form-group">
-          <label for="inputName">Full Name</label>
-          <input type="text" id="inputName" value="Bhuvan Batra">
-        </div>
-        <div class="form-group">
-          <label for="inputHeadline">Headline</label>
-          <input type="text" id="inputHeadline" value="AI & ML Undergraduate | Python & Backend Engineering">
-        </div>
-        <div class="form-group">
-          <label for="inputSummary">Professional Summary</label>
-          <textarea id="inputSummary">B.E. student specializing in Artificial Intelligence and Machine Learning at Chandigarh University (2024-2028). Passionate about robust backend architectures, digital public services, and practical applied AI.</textarea>
-        </div>
-        <div class="form-group">
-          <label for="inputCGPA">CGPA (Verified Academic Record)</label>
-          <input type="text" id="inputCGPA" value="6.66 / 10.0">
-        </div>
-        <div id="validationAlert" style="display:none; padding: 0.75rem; border-radius: 6px; background: #fee2e2; color: #991b1b; font-size: 0.85rem; margin-top: 1rem;"></div>
+      <div class="side-label resources-label">RESOURCES</div>
+      <div class="resource-note">
+        <span aria-hidden="true">◈</span>
+        <div><strong>Private by default</strong><p>Your draft stays in this browser. Export or clear it anytime.</p></div>
       </div>
-
-      <!-- Tab 2: Truthful Skill Matcher -->
-      <div id="view-match" role="tabpanel" aria-labelledby="tab-match" style="display:none;">
-        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">
-          Compare your resume skills directly against actual public-sector / software requirements. This engine computes factual semantic keyword overlap without fabricated scores.
-        </p>
-        <div class="form-group">
-          <label for="selectJobPreset">Sample Public Sector Role</label>
-          <select id="selectJobPreset">
-            <option value="egov">Public Sector Software & Data Systems Intern</option>
-            <option value="backend">Backend & API Engineer</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="jobDescText">Job Description / Competency Framework</label>
-          <textarea id="jobDescText" rows="4"></textarea>
-        </div>
-        <button type="button" class="primary" id="runMatchBtn" style="width:100%;">Evaluate Skill Coverage</button>
-
-        <div id="matchOutput" class="match-card" style="display:none;">
-          <div style="display:flex; justify-content:space-between; align-items:baseline;">
-            <span>Factual Keyword Coverage</span>
-            <span class="score-display" id="coverageScore">0%</span>
-          </div>
-          <div style="margin-top:0.5rem; font-size:0.85rem;">
-            <strong>Identified Skills in Resume:</strong>
-            <div id="matchedPills" class="pill-container"></div>
-          </div>
-          <div style="margin-top:0.5rem; font-size:0.85rem;">
-            <strong>Unmatched Target Keywords:</strong>
-            <div id="missingPills" class="pill-container"></div>
-          </div>
-        </div>
+      <div class="sidebar-bottom">
+        <span class="offline-dot" aria-hidden="true"></span> Local-first workspace
+        <div class="sidebar-byline">An open-source project by <a href="https://github.com/HuMaN-OG" target="_blank" rel="noopener noreferrer">Bhuvan Batra</a></div>
       </div>
+    </aside>
 
-      <!-- Tab 3: Public Sector Project Showcase -->
-      <div id="view-showcase" role="tabpanel" aria-labelledby="tab-showcase" style="display:none;">
-        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
-          Verified engineering initiatives aligning with National Informatics Centre (NIC) and digital governance priorities:
-        </p>
-        <div style="display:flex; flex-direction:column; gap:0.75rem;">
-          <div style="padding:0.75rem; border:1px solid var(--border); border-radius:6px;">
-            <strong>🚨 Disaster Triaging Prototype</strong>
-            <p style="font-size:0.8rem; color:var(--text-muted);">Multimodal citizen emergency reporting in English, Hindi, and Hinglish with role-based responders.</p>
-          </div>
-          <div style="padding:0.75rem; border:1px solid var(--border); border-radius:6px;">
-            <strong>🎓 University Service Assistant</strong>
-            <p style="font-size:0.8rem; color:var(--text-muted);">Citizen/student information retrieval with strict admin access control and rate limiting.</p>
-          </div>
-          <div style="padding:0.75rem; border:1px solid var(--border); border-radius:6px;">
-            <strong>🔬 IEEE Medical ML Research</strong>
-            <p style="font-size:0.8rem; color:var(--text-muted);">Co-authored peer-reviewed research on clinical diagnostic ML models (DOI: 10.1109/ICWITE64848.2025.11307058).</p>
-          </div>
+    <div class="main-shell">
+      <header class="topbar">
+        <div class="crumb">
+          <button class="mobile-menu" id="mobileMenuBtn" aria-label="Toggle navigation" aria-expanded="false" type="button">☰</button>
+          <span class="crumb-root">Workspace</span><span class="crumb-slash">/</span><strong id="breadcrumb">Overview</strong>
         </div>
-      </div>
-    </section>
-
-    <!-- Right Live Verified Resume Sheet -->
-    <section class="resume-sheet" aria-label="Resume Document Preview">
-      <header class="resume-header">
-        <h1 class="resume-name" id="displayFullName">Bhuvan Batra</h1>
-        <p id="displayHeadline" style="font-size:1.1rem; color:#334155; font-weight:500;">AI & ML Undergraduate | Python & Backend Engineering</p>
-        <div class="resume-contacts">
-          <span>📍 Chandigarh, India</span>
-          <span>📧 <a id="displayEmail" href="mailto:bhuvanbatra17may2006@gmail.com">bhuvanbatra17may2006@gmail.com</a></span>
-          <span class="phone-field" style="display:none;">📞 +91-XXXXXXXXXX</span>
-          <span>🔗 <a href="https://www.linkedin.com/in/bhuvan-batra-a75267220/" target="_blank" rel="noopener">LinkedIn</a></span>
-          <span>💻 <a href="https://github.com/HuMaN-OG" target="_blank" rel="noopener">GitHub</a></span>
-        </div>
+        <div class="top-actions"><span class="saved-indicator"><span aria-hidden="true">☁</span> Saved locally</span><button id="clearDataBtn" class="text-button" type="button">Clear my data</button></div>
       </header>
 
-      <section class="resume-section">
-        <h2 class="section-title">Professional Summary</h2>
-        <p id="displaySummary">B.E. student specializing in Artificial Intelligence and Machine Learning at Chandigarh University (2024-2028). Passionate about robust backend architectures, digital public services, and practical applied AI.</p>
-      </section>
-
-      <section class="resume-section">
-        <h2 class="section-title">Education</h2>
-        <div class="edu-item">
-          <div class="item-head">
-            <span>Chandigarh University</span>
-            <span>2024 – 2028</span>
+      <main id="mainContent" tabindex="-1">
+        <section id="overviewView" class="page-view">
+          <div class="page-head"><div><p class="eyebrow">YOUR CAREER WORKSPACE</p><h1>Build a resume that tells your story.</h1><p class="page-subtitle">Write, compare and tailor your applications for any industry — without made-up ATS scores.</p></div><button class="btn btn-primary" data-nav="editor" type="button">✎ &nbsp; Edit resume</button></div>
+          <div class="hero">
+            <div class="hero-copy"><p class="hero-kicker">CIVICFOLIO STUDIO &nbsp; / &nbsp; VERSION 2</p>
+              <h2>One workspace. Every opportunity.</h2>
+              <p>From software engineering and data analysis to operations, product and research roles.</p>
+              <div class="hero-actions"><button class="btn btn-hero" data-nav="checker" type="button">Check job alignment ↗</button><span class="hero-trust">✓ No account required</span></div>
+            </div>
+            <div class="hero-graphic" aria-hidden="true"><span class="hero-sheet sheet-a"></span><span class="hero-sheet sheet-b"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="hero-score">✓&nbsp; Evidence first</span></div>
           </div>
-          <div style="font-style:italic;">Bachelor of Engineering (B.E.), AI & ML</div>
-          <div>Academic Record: <strong id="displayCGPA">CGPA 6.66 / 10.0</strong></div>
-        </div>
-      </section>
-
-      <section class="resume-section">
-        <h2 class="section-title">Technical Competencies</h2>
-        <div style="margin-bottom:0.4rem;"><strong>Languages:</strong> Python, C++, JavaScript, SQL</div>
-        <div style="margin-bottom:0.4rem;"><strong>Backend & APIs:</strong> FastAPI, Flask, Node.js, Express, REST APIs</div>
-        <div style="margin-bottom:0.4rem;"><strong>Databases & Storage:</strong> SQLite, MongoDB, PostgreSQL</div>
-        <div><strong>Engineering & Tools:</strong> Git, Docker, GitHub Actions, Linux, PyTest, Jest</div>
-      </section>
-
-      <section class="resume-section">
-        <h2 class="section-title">Key Projects</h2>
-        
-        <div class="project-item">
-          <div class="item-head">
-            <span>Disaster Triaging System</span>
-            <a href="https://github.com/HuMaN-OG/Disaster-Triaging" target="_blank" rel="noopener">Repository</a>
+          <div class="metrics-grid">
+            <article class="metric-card"><div class="metric-label"><span class="metric-icon mint">◎</span> Skill coverage</div><div class="metric-value" id="dashCoverage">—</div><small id="dashCoverageCaption">Choose a job description</small></article>
+            <article class="metric-card"><div class="metric-label"><span class="metric-icon blue">▤</span> Resume readiness</div><div class="metric-value" id="dashReadiness">—</div><small id="dashReadinessCaption">Checklist, not a prediction</small></article>
+            <article class="metric-card"><div class="metric-label"><span class="metric-icon gold">✦</span> Improvements</div><div class="metric-value" id="dashPrompts">—</div><small>Concrete details to check</small></article>
+            <article class="metric-card"><div class="metric-label"><span class="metric-icon lilac">◷</span> Saved versions</div><div class="metric-value" id="dashVersions">0</div><small>Compare your applications</small></article>
           </div>
-          <p style="font-size:0.85rem; color:#334155;">Multimodal prototype classifying citizen emergency photos and scoring multilingual distress reports across English, Hindi, and Hinglish. Integrated role-based authentication and secure JWT validation.</p>
-        </div>
-
-        <div class="project-item">
-          <div class="item-head">
-            <span>University Information Chatbot</span>
-            <a href="https://github.com/HuMaN-OG/University-Chatbot" target="_blank" rel="noopener">Repository</a>
+          <div class="overview-grid">
+            <article class="white-card overview-workspace"><div class="card-head"><div><h2>Your resume workspace</h2><p>All sections are editable and appear in your live preview.</p></div><span class="soft-badge" id="sampleBadge">Sample data</span></div>
+              <div id="sectionProgress" class="section-progress"></div>
+              <button class="inline-action" data-nav="editor" type="button">Open resume builder &nbsp;→</button>
+            </article>
+            <article class="white-card improvements-card"><div class="card-head"><div><h2>Needs your attention</h2><p>Focus on evidence, not keyword stuffing.</p></div></div><div id="improvementList"></div><button class="inline-action" data-nav="checker" type="button">Run the ATS-style check &nbsp;→</button></article>
           </div>
-          <p style="font-size:0.85rem; color:#334155;">Full-stack institutional query assistant utilizing TF-IDF cosine similarity, rate limiting, and a JWT-protected administration portal for knowledge base synchronization.</p>
-        </div>
+          <div class="notice-line"><strong>What this product does:</strong> It checks a transparent skills dictionary and a resume quality checklist. It cannot predict recruiter decisions or reproduce a company's private ATS.</div>
+        </section>
 
-        <div class="project-item">
-          <div class="item-head">
-            <span>FORGE AI Computer-Use Engine</span>
-            <a href="https://github.com/HuMaN-OG/Forge" target="_blank" rel="noopener">Repository</a>
+        <section id="editorView" class="page-view" hidden>
+          <div class="page-head"><div><p class="eyebrow">WRITE WITH EVIDENCE</p><h1>Resume builder</h1><p class="page-subtitle">Edit every section. Your preview updates as you type.</p></div><button class="btn btn-primary" type="button" id="editorPrintBtn">Export PDF ↗</button></div>
+          <div class="editor-toolbar"><span class="edit-badge" id="editingBadge">Editing sample resume</span><div class="toolbar-actions"><button class="btn btn-subtle" type="button" id="loadSampleBtn">Load sample</button><button class="btn btn-subtle" type="button" id="startBlankBtn">Start blank</button><button class="btn btn-outline" type="button" id="saveSnapshotBtn">Save version</button></div></div>
+          <div class="editor-layout">
+            <div class="white-card editor-panel">
+              <div class="panel-heading"><h2>Resume sections</h2><p>Use concise, verifiable details and measurable results.</p></div>
+              <div class="section-tabs" id="editorTabs" role="tablist" aria-label="Resume sections">
+                <button class="section-tab active" type="button" data-section="profile" role="tab" aria-selected="true">Profile</button>
+                <button class="section-tab" type="button" data-section="skills" role="tab" aria-selected="false">Skills</button>
+                <button class="section-tab" type="button" data-section="experience" role="tab" aria-selected="false">Experience</button>
+                <button class="section-tab" type="button" data-section="projects" role="tab" aria-selected="false">Projects</button>
+                <button class="section-tab" type="button" data-section="education" role="tab" aria-selected="false">Education</button>
+                <button class="section-tab" type="button" data-section="certifications" role="tab" aria-selected="false">Certifications</button>
+                <button class="section-tab" type="button" data-section="publications" role="tab" aria-selected="false">Publications</button>
+              </div>
+              <div class="editor-fields" id="editorFields"></div>
+            </div>
+            <div class="preview-column"><div class="preview-title"><span>LIVE DOCUMENT PREVIEW</span><div><label class="inline-label" for="templateSelect">Style</label><select id="templateSelect" aria-label="Resume style"><option value="modern">Modern</option><option value="classic">Classic</option></select></div></div><div class="resume-preview" id="resumePreview"></div><p class="preview-note">Printing uses a single-column A4 layout. Long resumes may continue to a second page; trim content before submitting.</p></div>
           </div>
-          <p style="font-size:0.85rem; color:#334155;">Built Express backend orchestrator and human-approval safety gates bridging AI task planning with an isolated Python execution service for spreadsheet and document manipulation.</p>
-        </div>
+        </section>
 
-        <div class="project-item">
-          <div class="item-head">
-            <span>Full-Stack Expense Tracker</span>
-            <a href="https://github.com/HuMaN-OG/Expense-Tracker" target="_blank" rel="noopener">Repository</a>
+        <section id="checkerView" class="page-view" hidden>
+          <div class="page-head"><div><p class="eyebrow">TRANSPARENT MATCHING</p><h1>ATS-style resume checker</h1><p class="page-subtitle">Compare actual skills against a job description. No mystery percentages or promises of selection.</p></div><button class="btn btn-outline" type="button" id="checkerOpenEditorBtn">Edit resume →</button></div>
+          <div class="checker-grid">
+            <div class="white-card checker-form">
+              <h2>1. Target opportunity</h2><p>Use a sample role or paste the actual vacancy description.</p>
+              <label for="jobPreset">Example role</label><select id="jobPreset">
+                <option value="software">Software Engineer</option><option value="backend">Backend Developer</option>
+                <option value="data">Data Analyst</option><option value="ml">Machine Learning Engineer</option>
+                <option value="deployment">Deployment Analyst</option><option value="product">Product Analyst</option>
+                <option value="egov">Digital Public Services</option><option value="custom">Custom job description</option>
+              </select>
+              <label for="jobTitle">Role or company (optional)</label><input id="jobTitle" type="text" placeholder="e.g. Junior Developer at Example Co.">
+              <label for="jobDescription">Job description</label><textarea id="jobDescription" rows="9" placeholder="Paste the job description here. Longer, specific descriptions work best."></textarea>
+              <div class="field-help">Sample descriptions are examples, not active job postings.</div>
+              <div class="section-divider"></div>
+              <h2>2. Resume to analyze</h2>
+              <fieldset class="source-options"><legend class="sr-only">Resume source</legend><label><input type="radio" name="resumeSource" value="editor" checked> Current builder resume</label><label><input type="radio" name="resumeSource" value="upload"> Uploaded or pasted resume</label></fieldset>
+              <div id="uploadPanel" hidden>
+                <label for="resumeFile">Import resume file (PDF, DOCX, TXT or MD)</label><input id="resumeFile" type="file" accept=".pdf,.docx,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain">
+                <p class="field-help">Text is processed in your browser. PDF/DOCX reading uses optional third-party parser libraries loaded from a CDN; no file is sent to a CivicFolio server. Scanned-image PDFs may not work.</p>
+                <label for="resumePaste">Or paste resume text</label><textarea id="resumePaste" rows="5" placeholder="Paste your resume content..."></textarea>
+              </div>
+              <button class="btn btn-primary btn-full" type="button" id="runCheckBtn">Analyze resume ↗</button>
+              <p class="field-help" id="parseStatus" role="status"></p>
+            </div>
+            <div class="results-column">
+              <div class="white-card results-placeholder" id="checkerPlaceholder"><span class="placeholder-icon">◎</span><h2>Your report appears here</h2><p>Choose a job description and run the checker to see matched skills, gaps, and practical improvement suggestions.</p></div>
+              <div id="checkerResults" hidden></div>
+            </div>
           </div>
-          <p style="font-size:0.85rem; color:#334155;">Developed Express + MongoDB financial analytics application with database health awareness, CRUD transaction APIs, JWT session protection, and CSV reporting.</p>
-        </div>
-      </section>
+        </section>
 
-      <section class="resume-section">
-        <h2 class="section-title">Research Publications</h2>
-        <div>
-          <strong>Co-author:</strong> <em>Enhancing Lung Cancer Screening by Analysing Clinically Symptoms Using Machine Learning</em>
-          <div>IEEE International Conference for Women in Innovation, Technology & Entrepreneurship (ICWITE), 2025.</div>
-          <div>DOI: <a href="https://doi.org/10.1109/ICWITE64848.2025.11307058" target="_blank" rel="noopener">10.1109/ICWITE64848.2025.11307058</a></div>
-        </div>
-      </section>
-    </section>
-  </main>
+        <section id="versionsView" class="page-view" hidden>
+          <div class="page-head"><div><p class="eyebrow">TRACK YOUR PROGRESS</p><h1>Version history</h1><p class="page-subtitle">Save labeled snapshots for different jobs and compare changes before restoring.</p></div><button type="button" class="btn btn-primary" id="versionSaveBtn">＋ Save current version</button></div>
+          <div class="versions-grid"><div class="white-card"><h2>Saved snapshots</h2><p class="card-muted">Only stored in this browser until you export your workspace.</p><div id="versionList"></div></div><div class="white-card"><h2>Compare versions</h2><p class="card-muted">See which sections changed between two saved snapshots.</p><label for="compareA">Version A</label><select id="compareA"></select><label for="compareB">Version B</label><select id="compareB"></select><button class="btn btn-outline btn-full" id="compareBtn" type="button">Compare snapshots</button><div id="compareOutput" role="status"></div></div></div>
+        </section>
 
-  <script src="js/data.js"></script>
-  <script src="js/matcher.js"></script>
-  <script src="js/app.js"></script>
+        <section id="exportView" class="page-view" hidden>
+          <div class="page-head"><div><p class="eyebrow">SHARE WITH CONFIDENCE</p><h1>Export centre</h1><p class="page-subtitle">Save a professional PDF or back up your workspace as a portable JSON file.</p></div></div>
+          <div class="export-grid">
+            <article class="white-card export-card"><span class="feature-icon">▤</span><h2>Resume as PDF</h2><p>Browser print-to-PDF, A4, selectable text, one-column headings, no icons or charts in the printed document.</p><label for="exportTemplate">Resume layout</label><select id="exportTemplate"><option value="modern">Modern</option><option value="classic">Classic</option></select><button type="button" class="btn btn-primary btn-full" id="exportPdfBtn">Print / Save as PDF</button></article>
+            <article class="white-card export-card"><span class="feature-icon">⇣</span><h2>Export workspace JSON</h2><p>Download your edited resume and snapshots to transfer between devices. No CivicFolio account is necessary.</p><button type="button" class="btn btn-outline btn-full" id="exportJsonBtn">Download JSON backup</button><label for="importJsonInput">Restore a JSON backup</label><input type="file" id="importJsonInput" accept=".json,application/json"><p class="field-help">A restore replaces the current local workspace after confirmation.</p></article>
+          </div>
+          <div class="white-card export-review"><h2>Pre-export review</h2><div id="exportReview"></div><p class="card-muted">Use your browser's PDF preview to confirm page count and margins. This tool cannot guarantee one-page output for arbitrarily long resumes.</p></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div id="printMount" aria-hidden="true"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
