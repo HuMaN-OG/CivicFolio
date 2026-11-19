@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivicFolio — Public-Sector Tech Portfolio & Verified Resume</title>
+  <meta name="description" content="Accessible resume and public-sector software portfolio application for e-governance, backend, and data roles.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header role="banner">
+    <div class="logo-group">
+      <h1>🏛️ CivicFolio</h1>
+      <span class="badge-tag">NIC & Public Sector Tech Edition</span>
+    </div>
+    <div class="nav-actions">
+      <button type="button" id="versionToggleBtn">Version: E-Gov / Public Sector</button>
+      <button type="button" class="primary" id="printResumeBtn" aria-label="Print or Export PDF">📄 Export PDF</button>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <!-- Left Interaction & Control Panel -->
+    <section class="panel edit-panel" aria-labelledby="controls-heading">
+      <h2 id="controls-heading" class="section-title">Resume & Analysis Tools</h2>
+      
+      <nav class="tab-nav" role="tablist">
+        <button type="button" class="tab-btn active" role="tab" id="tab-edit" aria-controls="view-edit" aria-selected="true">Editor</button>
+        <button type="button" class="tab-btn" role="tab" id="tab-match" aria-controls="view-match" aria-selected="false">Skill Matcher</button>
+        <button type="button" class="tab-btn" role="tab" id="tab-showcase" aria-controls="view-showcase" aria-selected="false">Showcase</button>
+      </nav>
+
+      <!-- Tab 1: Real-time Editor -->
+      <div id="view-edit" role="tabpanel" aria-labelledby="tab-edit">
+        <div class="form-group">
+          <label for="inputName">Full Name</label>
+          <input type="text" id="inputName" value="Bhuvan Batra">
+        </div>
+        <div class="form-group">
+          <label for="inputHeadline">Headline</label>
+          <input type="text" id="inputHeadline" value="AI & ML Undergraduate | Python & Backend Engineering">
+        </div>
+        <div class="form-group">
+          <label for="inputSummary">Professional Summary</label>
+          <textarea id="inputSummary">B.E. student specializing in Artificial Intelligence and Machine Learning at Chandigarh University (2024-2028). Passionate about robust backend architectures, digital public services, and practical applied AI.</textarea>
+        </div>
+        <div class="form-group">
+          <label for="inputCGPA">CGPA (Verified Academic Record)</label>
+          <input type="text" id="inputCGPA" value="6.66 / 10.0">
+        </div>
+        <div id="validationAlert" style="display:none; padding: 0.75rem; border-radius: 6px; background: #fee2e2; color: #991b1b; font-size: 0.85rem; margin-top: 1rem;"></div>
+      </div>
+
+      <!-- Tab 2: Truthful Skill Matcher -->
+      <div id="view-match" role="tabpanel" aria-labelledby="tab-match" style="display:none;">
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">
+          Compare your resume skills directly against actual public-sector / software requirements. This engine computes factual semantic keyword overlap without fabricated scores.
+        </p>
+        <div class="form-group">
+          <label for="selectJobPreset">Sample Public Sector Role</label>
+          <select id="selectJobPreset">
+            <option value="egov">Public Sector Software & Data Systems Intern</option>
+            <option value="backend">Backend & API Engineer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="jobDescText">Job Description / Competency Framework</label>
+          <textarea id="jobDescText" rows="4"></textarea>
+        </div>
+        <button type="button" class="primary" id="runMatchBtn" style="width:100%;">Evaluate Skill Coverage</button>
+
+        <div id="matchOutput" class="match-card" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <span>Factual Keyword Coverage</span>
+            <span class="score-display" id="coverageScore">0%</span>
+          </div>
+          <div style="margin-top:0.5rem; font-size:0.85rem;">
+            <strong>Identified Skills in Resume:</strong>
+            <div id="matchedPills" class="pill-container"></div>
+          </div>
+          <div style="margin-top:0.5rem; font-size:0.85rem;">
+            <strong>Unmatched Target Keywords:</strong>
+            <div id="missingPills" class="pill-container"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Public Sector Project Showcase -->
+      <div id="view-showcase" role="tabpanel" aria-labelledby="tab-showcase" style="display:none;">
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
+          Verified engineering initiatives aligning with National Informatics Centre (NIC) and digital governance priorities:
+        </p>
+        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+          <div style="padding:0.75rem; border:1px solid var(--border); border-radius:6px;">
+            <strong>🚨 Disaster Triaging Prototype</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Multimodal citizen emergency reporting in English, Hindi, and Hinglish with role-based responders.</p>
+          </div>
+          <div style="padding:0.75rem; border:1px solid var(--border); border-radius:6px;">
+            <strong>🎓 University Service Assistant</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Citizen/student information retrieval with strict admin access control and rate limiting.</p>
+          </div>
+          <div style="padding:0.75rem; border:1px solid var(--border); border-radius:6px;">
+            <strong>🔬 IEEE Medical ML Research</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Co-authored peer-reviewed research on clinical diagnostic ML models (DOI: 10.1109/ICWITE64848.2025.11307058).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Live Verified Resume Sheet -->
+    <section class="resume-sheet" aria-label="Resume Document Preview">
+      <header class="resume-header">
+        <h1 class="resume-name" id="displayFullName">Bhuvan Batra</h1>
+        <p id="displayHeadline" style="font-size:1.1rem; color:#334155; font-weight:500;">AI & ML Undergraduate | Python & Backend Engineering</p>
+        <div class="resume-contacts">
+          <span>📍 Chandigarh, India</span>
+          <span>📧 <a id="displayEmail" href="mailto:bhuvanbatra17may2006@gmail.com">bhuvanbatra17may2006@gmail.com</a></span>
+          <span class="phone-field" style="display:none;">📞 +91-XXXXXXXXXX</span>
+          <span>🔗 <a href="https://www.linkedin.com/in/bhuvan-batra-a75267220/" target="_blank" rel="noopener">LinkedIn</a></span>
+          <span>💻 <a href="https://github.com/HuMaN-OG" target="_blank" rel="noopener">GitHub</a></span>
+        </div>
+      </header>
+
+      <section class="resume-section">
+        <h2 class="section-title">Professional Summary</h2>
+        <p id="displaySummary">B.E. student specializing in Artificial Intelligence and Machine Learning at Chandigarh University (2024-2028). Passionate about robust backend architectures, digital public services, and practical applied AI.</p>
+      </section>
+
+      <section class="resume-section">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-item">
+          <div class="item-head">
+            <span>Chandigarh University</span>
+            <span>2024 – 2028</span>
+          </div>
+          <div style="font-style:italic;">Bachelor of Engineering (B.E.), AI & ML</div>
+          <div>Academic Record: <strong id="displayCGPA">CGPA 6.66 / 10.0</strong></div>
+        </div>
+      </section>
+
+      <section class="resume-section">
+        <h2 class="section-title">Technical Competencies</h2>
+        <div style="margin-bottom:0.4rem;"><strong>Languages:</strong> Python, C++, JavaScript, SQL</div>
+        <div style="margin-bottom:0.4rem;"><strong>Backend & APIs:</strong> FastAPI, Flask, Node.js, Express, REST APIs</div>
+        <div style="margin-bottom:0.4rem;"><strong>Databases & Storage:</strong> SQLite, MongoDB, PostgreSQL</div>
+        <div><strong>Engineering & Tools:</strong> Git, Docker, GitHub Actions, Linux, PyTest, Jest</div>
+      </section>
+
+      <section class="resume-section">
+        <h2 class="section-title">Key Projects</h2>
+        
+        <div class="project-item">
+          <div class="item-head">
+            <span>Disaster Triaging System</span>
+            <a href="https://github.com/HuMaN-OG/Disaster-Triaging" target="_blank" rel="noopener">Repository</a>
+          </div>
+          <p style="font-size:0.85rem; color:#334155;">Multimodal prototype classifying citizen emergency photos and scoring multilingual distress reports across English, Hindi, and Hinglish. Integrated role-based authentication and secure JWT validation.</p>
+        </div>
+
+        <div class="project-item">
+          <div class="item-head">
+            <span>University Information Chatbot</span>
+            <a href="https://github.com/HuMaN-OG/University-Chatbot" target="_blank" rel="noopener">Repository</a>
+          </div>
+          <p style="font-size:0.85rem; color:#334155;">Full-stack institutional query assistant utilizing TF-IDF cosine similarity, rate limiting, and a JWT-protected administration portal for knowledge base synchronization.</p>
+        </div>
+
+        <div class="project-item">
+          <div class="item-head">
+            <span>FORGE AI Computer-Use Engine</span>
+            <a href="https://github.com/HuMaN-OG/Forge" target="_blank" rel="noopener">Repository</a>
+          </div>
+          <p style="font-size:0.85rem; color:#334155;">Built Express backend orchestrator and human-approval safety gates bridging AI task planning with an isolated Python execution service for spreadsheet and document manipulation.</p>
+        </div>
+
+        <div class="project-item">
+          <div class="item-head">
+            <span>Full-Stack Expense Tracker</span>
+            <a href="https://github.com/HuMaN-OG/Expense-Tracker" target="_blank" rel="noopener">Repository</a>
+          </div>
+          <p style="font-size:0.85rem; color:#334155;">Developed Express + MongoDB financial analytics application with database health awareness, CRUD transaction APIs, JWT session protection, and CSV reporting.</p>
+        </div>
+      </section>
+
+      <section class="resume-section">
+        <h2 class="section-title">Research Publications</h2>
+        <div>
+          <strong>Co-author:</strong> <em>Enhancing Lung Cancer Screening by Analysing Clinically Symptoms Using Machine Learning</em>
+          <div>IEEE International Conference for Women in Innovation, Technology & Entrepreneurship (ICWITE), 2025.</div>
+          <div>DOI: <a href="https://doi.org/10.1109/ICWITE64848.2025.11307058" target="_blank" rel="noopener">10.1109/ICWITE64848.2025.11307058</a></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/matcher.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
