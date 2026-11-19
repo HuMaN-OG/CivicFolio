@@ -1,66 +1,89 @@
-# 🏛️ CivicFolio
+# CivicFolio — Resume Builder & ATS-Style Checker
 
-> An accessible resume and public-sector software portfolio application tailored for NIC-style digital governance, public data systems, and software engineering roles.
+A **general-purpose, local-first resume builder** with transparent job-description matching, version history and A4 PDF printing. Built by [Bhuvan Batra](https://github.com/HuMaN-OG).
 
-![CivicFolio Interface](docs/screenshots/civicfolio_preview.png)
+**Important:** CivicFolio is not an ATS vendor, does not predict hiring decisions, and does not provide a proprietary “ATS pass score.” Skill coverage is an interpretable dictionary-based heuristic.
 
----
+## What problem does it solve?
 
-## 🎯 Purpose and Real Capabilities
+Candidates need to tailor resumes for many roles, understand which job requirements they have actually demonstrated, track revisions, and produce readable documents. CivicFolio combines those workflows in one responsive application without requiring a login.
 
-CivicFolio is built specifically to address the needs of public-sector technical evaluations, e-governance technology roles, and software engineering internships:
-- **Interactive Technical Portfolio**: Highlights citizen-facing systems (Disaster Triaging, University Chatbot, FORGE AI, Expense Tracker) and peer-reviewed research.
-- **Truthful Skill Matching Engine**: Compares applicant skills against actual job requirements using semantic token overlap rather than opaque, fabricated ATS percentages.
-- **Data Validation & Privacy**: Warns if required credentials or academic fields are missing. Restricts sensitive contact information (phone number) strictly to downloaded print media.
-- **One-Page PDF Export**: Specialized `@media print` stylesheet ensures clean, accessible PDF generation directly via browser Print (`Ctrl + P`).
-- **Academic & Research Integrity**: Reflects verified cumulative performance (**CGPA 6.66 / 10.0**, without fabricated percentage conversions) and links the official **IEEE ICWITE 2025** conference publication.
+## Features
 
----
+| Feature | Details |
+| --- | --- |
+| **Resume builder** | Editable name/contact, summary, skills, experience, projects, education, certifications and publications |
+| **Live preview** | Single-column resume generated from entered data; user content is HTML-escaped and unsafe links are blocked |
+| **Multi-role job checker** | Paste any job description or try example Software, Backend, Data, ML, Deployment, Product or Digital Services roles |
+| **ATS-style skill matching** | Shows matched vs missing recognized competencies, using the transparent dictionary in [js/matcher.js](js/matcher.js) |
+| **Imported resume analysis** | Check the editable resume, paste text, or import TXT, MD, PDF or DOCX files |
+| **Readiness checklist** | Contact information, headline, summary, skills, education, experience, measurable evidence and length |
+| **Version history** | Save labeled snapshots, compare changed sections, restore or remove earlier versions |
+| **Data portability** | Export and import your workspace JSON |
+| **A4 export** | Browser Print / Save as PDF; modern or classic ATS-friendly single-column resume layout |
+| **Local-first privacy** | Browser localStorage; no CivicFolio account, database or server-side resume uploads |
+| **Responsive UI** | Navigation for mobile, keyboard focus styles and semantic HTML |
 
-## 🛠️ Tech Stack
+The default “Alex Morgan” candidate is **fictional sample data**, not a real person’s resume. Replace it before using CivicFolio for an application.
 
-- **Frontend**: Vanilla HTML5 (semantic ARIA landmarks), CSS3 (CSS variables, responsive grid, `@media print`), JavaScript (ES6+).
-- **Testing**: Built-in Node.js Test Runner (`node:test`, `node:assert/strict`).
-- **CI / CD**: GitHub Actions automated pipeline.
+## Running locally
 
----
+1. Clone: https://github.com/HuMaN-OG/CivicFolio
+2. Open the repository folder.
+3. With Python 3 installed, run:
 
-## 🚀 Getting Started
+    python -m http.server 3000
 
-### 1. Run Locally
-```bash
-# Serve using any standard static server (e.g. Node serve or Python)
-npx serve -l 3000 .
-# or
-python -m http.server 3000
-```
-Open `http://localhost:3000` in your browser.
+4. Visit http://localhost:3000.
 
-### 2. Run Automated Tests
-```bash
-npm test
-```
+Node.js 20+ runs the zero-dependency tests:
 
----
+    npm run verify
 
-## 📄 Public Resume Versions
+This runs browser JavaScript syntax checks and Node's built-in test runner.
 
-Two role-specific, factual resumes are available as publicly viewable GitHub documents. These are designed to match the polished, one-page PDFs available from the resume owner.
+## Typical workflow
 
-- **[NIC — Software & e-Governance Resume](resumes/NIC_Resume.md)**
-- **[SLB — Deployment Analyst Resume](resumes/SLB_Resume.md)**
+1. **Build:** Open Resume builder, use the fictional sample or Start blank, and edit all relevant sections.
+2. **Analyze:** Open ATS-style checker, paste a real job description and compare it against the current resume or another pasted/uploaded document.
+3. **Improve:** Inspect matched and missing skills. Mention missing competencies **only if you can truthfully demonstrate them** through work or projects.
+4. **Version:** Save a named snapshot, tailor for a different role, and compare the updated sections.
+5. **Export:** Choose Modern or Classic; use Print / Save as PDF. Verify print page count and remove unnecessary text if it spills beyond one page. Export JSON as a backup.
 
-> The public GitHub pages show the resume text; the submitted PDF version is formatted as exactly one A4 page. For a **direct public PDF link**, upload the matching PDF to Google Drive and enable “Anyone with the link → Viewer,” or enable GitHub Pages and publish the PDFs there. Do not imply academic eligibility based solely on the resume: check each employer's stated criteria.
+## Architecture
 
----
+- **index.html:** Dashboard, editor, checker, versions and export screens
+- **css/style.css:** Responsive styles, live preview and A4 print layout
+- **js/data.js:** Fictional sample profile and general job descriptions
+- **js/matcher.js:** Defined skill aliases, document checks and comparison logic
+- **js/render.js:** Safe HTML renderer for preview and printed resume
+- **js/app.js:** Browser interactions, local persistence, file parsing and version history
+- **tests/:** Deterministic checks for matching, validation, safety and section changes
+- **.github/workflows/:** Test and GitHub Pages automation
 
-## 🔗 Verified Profiles & Publications
+No backend is necessary. The deployed application is static and can be hosted on GitHub Pages.
 
-- **LinkedIn**: [https://www.linkedin.com/in/bhuvan-batra-a75267220/](https://www.linkedin.com/in/bhuvan-batra-a75267220/)
-- **GitHub**: [https://github.com/HuMaN-OG](https://github.com/HuMaN-OG)
-- **IEEE Publication**: [DOI: 10.1109/ICWITE64848.2025.11307058](https://doi.org/10.1109/ICWITE64848.2025.11307058)
+## Privacy, honesty and limitations
 
----
+- Resume information and saved versions stay in the browser’s localStorage on the current device and origin; they are not synchronized to an account. **Clear my data** deletes that local workspace.
+- The app does not transmit resume text to a CivicFolio API. For PDF/DOCX imports, it downloads parser JavaScript from a third-party CDN on demand. This requires a network connection and trust in those dependencies. TXT/MD and pasted text need no external parser.
+- Image-only/scanned PDFs may have no extractable text. PDF and DOCX imports are for **checking**, not automatic reconstruction into the editor.
+- Its curated skill dictionary is incomplete, and exact aliases can miss synonyms. **Missing** means "not recognized in this resume text," not "the candidate lacks the skill."
+- There is no claim of recruiter approval probability, actual employer ATS equivalence, or guaranteed interview selection.
+- LocalStorage is not encrypted; avoid storing personal details on a shared computer.
+- Long resumes can print to multiple pages. Check the browser's print preview manually.
+- **Never add an unearned skill or fabricated number just to increase coverage.**
 
-## 📝 License
-MIT License.
+## Deploying
+
+GitHub Actions tests changes on pull requests. The repository's Pages workflow can publish main once the owner has enabled **Settings → Pages → Source: GitHub Actions**.
+
+A green CI status verifies syntax and unit checks, not full browser/device compatibility. Manually test mobile layout, PDF page count, PDF/DOCX import, local data restoration and accessibility before claiming complete cross-browser coverage.
+
+## How this helps my portfolio
+
+**Resume-ready description:**
+
+> Built CivicFolio, a responsive, privacy-first resume builder and ATS-style checker using HTML, CSS and JavaScript. Implemented editable resume sections, transparent job-description skill matching, import analysis, browser-based version control, accessible A4 print layouts, and automated regression tests.
+
+**Owner:** [Bhuvan Batra](https://github.com/HuMaN-OG) · [LinkedIn](https://www.linkedin.com/in/bhuvan-batra-a75267220/)

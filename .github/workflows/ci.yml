@@ -16,4 +16,4 @@ jobs:
         with:
           node-version: 20
       - name: Run Test Suite
-        run: npm test
+        run: npm run verify

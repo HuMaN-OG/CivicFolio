@@ -1,19 +1,23 @@
 {
   "name": "civicfolio",
-  "version": "1.0.0",
-  "description": "CivicFolio — Accessible Resume & Public-Sector Technology Portfolio Application",
-  "main": "js/app.js",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Privacy-first resume builder with transparent ATS-style skill matching, editable templates, version history and local PDF export",
   "scripts": {
-    "start": "npx serve -l 3000 .",
-    "test": "node --test tests/*.test.js"
+    "start": "python -m http.server 3000",
+    "test": "node --test tests/*.test.js",
+    "check": "node --check js/data.js && node --check js/matcher.js && node --check js/render.js && node --check js/app.js",
+    "verify": "npm run check && npm test"
   },
   "keywords": [
-    "civicfolio",
-    "portfolio",
-    "e-governance",
     "resume-builder",
-    "public-sector-tech",
-    "ats-keyword-matcher"
+    "ats-checker",
+    "keyword-matching",
+    "job-search",
+    "portfolio-project",
+    "javascript",
+    "privacy-first",
+    "pdf-export"
   ],
   "author": "Bhuvan Batra",
   "license": "MIT"
