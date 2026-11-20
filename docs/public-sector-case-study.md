@@ -1,46 +1,48 @@
-# CivicFolio public-sector case study
+# CivicFolio — career-readiness and digital-services case study
 
-This case study preserves the specific use case that motivated CivicFolio's earlier public-sector prototype. It is **not** a second deployed product or a claim that any example project was deployed by a government agency.
+This case study documents an illustrative workflow for assessing technical experience, adapting a resume to a role, and explaining engineering projects with verifiable evidence. **It is not associated with, tailored to, or endorsed by any specific employer or institution.** The application itself is designed for students, early-career professionals, and applicants across public, private, nonprofit, and research settings.
 
 ## The problem
 
-An AI/ML undergraduate preparing for National Informatics Centre (NIC)-style software and digital-services opportunities needs two outputs: a truthful, editable resume and a concise explanation of why individual engineering projects relate to data integrity, public-service access, and reliable backends. A generic keyword score is not sufficient evidence of competence.
+Candidates applying to different technical roles often need to edit their resumes repeatedly, understand which job requirements their documents actually demonstrate, and present credible project outcomes. Keyword scores alone cannot establish competence or predict hiring decisions. The problem is especially visible in software engineering, AI/ML, data analytics, deployment operations, and digital-services work.
 
-The first prototype combined a resume view, a public-sector job matcher, a short project showcase and browser PDF printing. The maintained app broadened this into a general-purpose resume workspace with multi-role job examples, imported-document checks, version comparison, data portability, an A4 layout, and broader automated checks.
+The early CivicFolio prototype demonstrated a small resume editor, job-description matching, a technical-project showcase, and browser PDF printing. The maintained app now supports general-purpose editing, multiple sample role categories, imported-document checks, version comparison, data portability, PDF printing, and broader automated checks.
 
-## What was retained in the maintained CivicFolio app
+## What is available in the maintained application
 
-| Legacy idea | Where to find it now |
+| User need | CivicFolio workflow |
 | --- | --- |
-| Match a resume to a public-sector technology brief | ATS-style checker → **Digital Public Services Intern** sample, or paste an actual notice |
-| Explain project relevance using evidence | Resume builder → **Projects**, with links and concrete implementation details |
-| Include scholarly work only when documented | Resume builder → **Publications**, with a verifiable DOI |
-| Export a concise, readable resume | Export centre → Classic or Modern → Print / Save as PDF |
-| Avoid unexplained proprietary ATS percentages | Matched / missing recognized requirements and the transparent skill-alias matcher |
-| A straightforward browser-based interface | Responsive editor, preview, version history and local workspace storage |
+| Present an authentic professional profile | Resume builder → editable experience, education, projects, skills, certifications and publications |
+| Compare a resume with a technical opportunity | ATS-style checker → paste any job description or choose a **generic** sample role |
+| Explain technical projects | Resume builder → Projects, with repository links, implementation details and evidence |
+| Assess visible skill coverage | Matched and missing recognized terms with a transparent dictionary-based matcher |
+| Tailor the same resume to several roles | Save labeled versions; compare changes and restore a previous snapshot |
+| Produce a shareable document | Export centre → single-column PDF through browser printing |
+| Keep personal data on the current device | Browser local storage and JSON export/import for backup |
 
-There is intentionally no hard-coded “NIC mode” that narrows the application to one employer, and no real candidate's personal data ships as the default profile.
+No employer-specific mode is required, and the shipped default candidate is fictional.
 
-## Evidence-led project showcase: original examples
+## Transferable technical-project examples
 
-These examples came from the v1 showcase and illustrate **possible alignment**, not employer endorsements or independently verified impact metrics. Verify each repository's current behavior before putting a statement into a submitted resume.
+These project examples illustrate how a candidate might explain engineering competencies. They do **not** imply independent verification, external adoption, public deployment impact, or any hiring endorsement. Confirm each repository's present implementation before using a claim in an application.
 
-- [Disaster-Triaging](https://github.com/HuMaN-OG/Disaster-Triaging): multilingual emergency-report triage and access-controlled responder workflows. Discuss input validation, who can see sensitive reports, and what evaluation data support the model.
-- [University-Chatbot](https://github.com/HuMaN-OG/University-Chatbot): institutional information retrieval with administrative controls. Discuss updating the knowledge base, authentication and handling unanswered queries.
-- [Forge](https://github.com/HuMaN-OG/Forge): orchestrated automation with approval gates. Discuss how risky operations are constrained and logged.
-- [Expense-Tracker](https://github.com/HuMaN-OG/Expense-Tracker): persistent records, CRUD operations and report exports. Discuss transaction validation, failure handling and the difference between a prototype and a production financial system.
-- A candidate may also cite a publication with an authentic DOI, for example the public [IEEE ICWITE 2025 entry](https://doi.org/10.1109/ICWITE64848.2025.11307058), **only if they are an author**.
+- [Disaster Triaging](https://github.com/HuMaN-OG/Disaster-Triaging): multilingual report processing and role-based workflows; relevant themes include input validation, reliability, and sensitive-data handling
+- [University Chatbot](https://github.com/HuMaN-OG/University-Chatbot): information retrieval and administration; relevant themes include authentication, updates, and handling unknown questions
+- [Forge](https://github.com/HuMaN-OG/Forge): controlled automation and approvals; relevant themes include safety gates, auditability, and isolation
+- [Expense Tracker](https://github.com/HuMaN-OG/Expense-Tracker): persistent records, APIs, and reporting; relevant themes include validation, data integrity, and error handling
 
-## Reproduce the original scenario in today's product
+For publications or certifications, include only achievements the candidate can substantiate with a reliable link or document.
 
-1. Open [CivicFolio](https://human-og.github.io/CivicFolio/) and choose **Start blank** or load the **fictional** example.
-2. Enter only your own verifiable projects, education and skills. Link source repositories and include measured results only when evidenced.
-3. Open **ATS-style checker**, choose **Digital Public Services Intern** and run the comparison. For a real application, replace the sample text with its actual job notice.
-4. Inspect which recognized skills are present or absent; the dictionary is not a hiring prediction and missing tokens are not proof of missing ability.
-5. Save a named version, compare it with a later tailored version and export a single-column PDF.
+## Reproduce the workflow without targeting a named employer
 
-## Historical code and migration notes
+1. Open the [live CivicFolio application](https://human-og.github.io/CivicFolio/) and select **Start blank** or load the clearly labeled fictional example.
+2. Add your own accurate skills, project results, and links. Leave out unverifiable achievements.
+3. Open **ATS-style checker** and choose a generic sample role (software, backend, data, ML, deployment, product, or digital services) or paste an actual job description.
+4. Inspect the recognized matches and gaps. A missing keyword does not establish that the candidate lacks a competency; an apparent match does not prove proficiency.
+5. Save a version for the role, compare it with another version, then print a single-column resume to PDF.
 
-The maintained repository contains the [shared v1 history at commit `e9820769cf5183ee28f8dcf8687db69a6f0075ed`](https://github.com/HuMaN-OG/CivicFolio/tree/e9820769cf5183ee28f8dcf8687db69a6f0075ed), so earlier code remains inspectable through **this repository** without keeping another mirror. The obsolete `CivicFolio-Prototype` repository's only two subsequent changes were a legacy notice in its README and removal of an unsuccessful Pages deployment workflow; no newer feature implementation needed to be transplanted.
+## Prototype history and scope
 
-This case study retains the distinctive public-sector showcase and its learning context without maintaining a second application or copying a real person's private data into the general-purpose demo.
+The canonical repository retains the [shared original prototype commit `e9820769cf5183ee28f8dcf8687db69a6f0075ed`](https://github.com/HuMaN-OG/CivicFolio/tree/e9820769cf5183ee28f8dcf8687db69a6f0075ed). The redundant prototype repository's only later commits added a legacy notice and retired its old Pages deployment workflow. No additional application feature needs to be copied from that mirror.
+
+The case study preserves the original learning context while presenting CivicFolio as a reusable, employer-neutral portfolio project. It is an illustrative use case, not a proprietary applicant tracking system or a guaranteed hiring predictor.
