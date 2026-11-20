@@ -10,6 +10,10 @@ A **general-purpose, local-first resume builder** with transparent job-descripti
 
 **Important:** CivicFolio is not an ATS vendor, does not predict hiring decisions, and does not provide a proprietary “ATS pass score.” Skill coverage is an interpretable dictionary-based heuristic.
 
+## Public-sector case study and project history
+
+CivicFolio began as an NIC-focused portfolio and resume prototype. Its useful ideas—public-service role targeting, an evidence-backed project showcase, and an explainable skill comparison—are retained in the current general-purpose product. Read the [public-sector case study](docs/public-sector-case-study.md) for the original use case, a reproducible demonstration and the archived v1 commit. The default profile is deliberately fictional; no user's private resume data is embedded in the app.
+
 ## What problem does it solve?
 
 Candidates need to tailor resumes for many roles, understand which job requirements they have actually demonstrated, track revisions, and produce readable documents. CivicFolio combines those workflows in one responsive application without requiring a login.
